@@ -5,7 +5,7 @@
 * 安装完**open-vm-tools-dkms**后，手动创建**hgfs**文件夹：`mkdir /mnt/hgfs`，尔后进行挂载：`vmhgfs-fuse .host:/ /mnt/hgfs`，报错？那你肯定没安装**fuse**这个🖊：`apt-get install fuse`
 * 这样就手动挂载完毕了，但这有个问题，重启就没了，所以为了一劳永逸，可以修改*/etc/fstab*文件：
     * 如果之前用的是**open-vm-kms**,那么在*fstab*文件最后加入：`.host:/sharefolder /mnt/hgfs vmhgfs defaults, nonempty 0 0`，重启（其中，**sharefolder**为共享文件夹名字，当然你可以直接`.host:/`默认挂载全部共享文件夹）；
-    * 如果用的是**open-vm-tools-dkms**，那么在其最后加入： `.host/sharefolder /mnt/hgfs fuse.vmhgfs-fuse allow_other, defaults, nonempty 0 0`，重启，完毕；
+    * 如果用的是**open-vm-tools-dkms**，那么在其最后加入： `.host:/sharefolder /mnt/hgfs fuse.vmhgfs-fuse allow_other, defaults, nonempty 0 0`，重启，完毕；
 
 ## 关于windows共享给虚拟机linux的文件，行尾存在^M问题：
  * 在VIM命令模式下输入：`:%s/^M$//g`，**注意**：^M要用 *ctrl + v, vtrl + m*来输入；
